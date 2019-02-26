@@ -1,0 +1,56 @@
+version: '3'
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+  kafka:
+    depends_on:
+      - zookeeper
+    image: wurstmeister/kafka
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: 10.120.14.101
+      KAFKA_CREATE_TOPICS: "test:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+  mysql:
+    image: mysql:5.7.25
+    container_name: mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql_db:/tmp/mysql
+      - ./mysql_code/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: smart_running_helper
+      MYSQL_USER: srh
+      MYSQL_PASSWORD: srh
+  jupyter:
+    image: karaswinds/team_project_python
+    container_name: jupyter
+    ports:
+      - "8888:8888"
+      - "80:5000"
+    volumes:
+      - ./py_code:/home/jovyan/work
+    command: "start-notebook.sh --NotebookApp.token=''"
+  ngrok:
+    depends_on:
+      - jupyter
+    image: wernight/ngrok
+    container_name : ngrok
+    ports:
+      - '4040:4040'
+    environment:
+      NGROK_PORT: jupyter:5000
+      NGROK_REGION: ap
+  admin:
+    image: adminer
+    container_name: admin
+    restart: always
+    ports:
+      - "8080:8080"
