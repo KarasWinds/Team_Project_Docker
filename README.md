@@ -1,6 +1,6 @@
 # Team_Project_Docker
 
----version->0226-v1---<br>
+---version->0304-v2---<br>
 1.docker安裝程序在install_Docker資料夾中<br>
 2.jupyter工作目錄檔案請放至py_code資料夾中<br>
 3.docker-compose.yml目前包含:<br>
@@ -10,6 +10,7 @@
   (4)jupyter<br>
   (5)ngrok<br>
   (6)adminer<br>
+  (7)mongoDB<br>
 4.jupyter預設安裝套件如下:<br>
   (1)Flask(0.12)<br>
   (2)requests<br>
@@ -19,11 +20,13 @@
   (6)pandas<br>
   (7)numpy<br>
   (8)mysql-connector<br>
+  (9)urllib3<br>
+  (10)bs4<br>
+  (11)pymongo<br>
 <br>
 ---暫定預計更新內容---<br>
 新增Docker_continer:<br>
-  (1)mongoDB<br>
-  (2)Elasticsearch<br>
-  (3)Logstash<br>
-  (4)Kibana<br>
-  (5)Grafana<br>
+  (1)Elasticsearch<br>
+  (2)Logstash<br>
+  (3)Kibana<br>
+  (4)Grafana<br>
