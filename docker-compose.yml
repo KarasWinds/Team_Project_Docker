@@ -29,6 +29,17 @@ services:
       MYSQL_DATABASE: smart_running_helper
       MYSQL_USER: srh
       MYSQL_PASSWORD: srh
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ./mongodb:/data/db
+    ports:
+      - "27017:27017"
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
   jupyter:
     image: karaswinds/team_project_python
     container_name: jupyter
