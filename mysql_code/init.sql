@@ -23,6 +23,14 @@ CREATE TABLE IF NOT EXISTS `user_sport_database` (
 	`rotation_y_std` FLOAT NOT NULL
 )
 COLLATE='utf8_general_ci'
-ENGINE=InnoDB
-;
+ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS `user_sport_status`;
+CREATE TABLE IF NOT EXISTS `user_sport_status` (
+        `UserID` CHAR(50) NOT NULL,
+        `Time` DATETIME NOT NULL,
+        `Tag` CHAR(50) NOT NULL
+        
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;

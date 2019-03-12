@@ -11,6 +11,9 @@
   (5)ngrok<br>
   (6)adminer<br>
   (7)mongoDB<br>
+  (8)Elasticsearch<br>
+  (9)Logstash<br>
+  (10)Kibana<br>
 4.jupyter預設安裝套件如下:<br>
   (1)Flask(0.12)<br>
   (2)requests<br>
@@ -24,9 +27,3 @@
   (10)bs4<br>
   (11)pymongo<br>
 <br>
----暫定預計更新內容---<br>
-新增Docker_continer:<br>
-  (1)Elasticsearch<br>
-  (2)Logstash<br>
-  (3)Kibana<br>
-  (4)Grafana<br>

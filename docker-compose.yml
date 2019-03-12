@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 services:
   zookeeper:
     image: wurstmeister/zookeeper
@@ -16,6 +16,38 @@ services:
       KAFKA_ADVERTISED_HOST_NAME: 10.120.14.101
       KAFKA_CREATE_TOPICS: "test:1:1"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.5.0
+    container_name: elasticsearch
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+  logstash:
+    image: docker.elastic.co/logstash/logstash:6.5.0
+    container_name: logstash
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+    ports:
+      - "5000:5000"
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    depends_on:
+      - elasticsearch
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.5.0
+    container_name: kibana
+    volumes:
+      - ./kibana/config/:/usr/share/kibana/config:ro
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
   mysql:
     image: mysql:5.7.25
     container_name: mysql
